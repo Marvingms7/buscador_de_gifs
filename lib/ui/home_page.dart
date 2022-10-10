@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late String _buscar;
 
-  late int _offSet;
+  final int _offSet = 26;
 
   Future<Map> _getGifs() async {
     http.Response response;
