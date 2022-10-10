@@ -16,11 +16,10 @@ class _HomePageState extends State<HomePage> {
 
   late int _offSet;
 
-  Future _getGifs() async {
+  Future<Map> _getGifs() async {
     http.Response response;
 
-    // ignore: unnecessary_null_comparison
-    if (_buscar == null) {
+    if (_buscar == '') {
       response = await http.get(Uri.parse(
           'https://api.giphy.com/v1/gifs/trending?api_key=aaVClH3IDxPutSQeutFyZrw8OXYS1wHA&limit=25&rating=g'));
     } else {
@@ -50,10 +49,10 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.black,
       body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(10.0),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
             child: TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white)),
                   labelText: 'Pesquise aqui!',
@@ -61,8 +60,13 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   border: OutlineInputBorder()),
-              style: TextStyle(color: Colors.white, fontSize: 18.0),
+              style: const TextStyle(color: Colors.white, fontSize: 18.0),
               textAlign: TextAlign.center,
+              onSubmitted: (text) {
+                setState(() {
+                  _buscar = text;
+                });
+              },
             ),
           ),
           Expanded(
