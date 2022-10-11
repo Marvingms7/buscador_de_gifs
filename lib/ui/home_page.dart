@@ -99,20 +99,52 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  int _getCount(data) {
+    if (_buscar == '') {
+      return data.length;
+    } else {
+      return data.length + 1;
+    }
+  }
+
   Widget _criarTabelaGif(BuildContext context, AsyncSnapshot snapshot) {
     return GridView.builder(
       padding: const EdgeInsets.all(10.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, crossAxisSpacing: 10.0, mainAxisSpacing: 10.0),
-      itemCount: snapshot.data['data'].length,
+      itemCount: _getCount(snapshot.data['data'].length),
       itemBuilder: (context, index) {
-        return GestureDetector(
-          child: Image.network(
-            snapshot.data['data'][index]['images']['fixed_height']['url'],
-            height: 200.0,
-            fit: BoxFit.cover,
-          ),
-        );
+        if (_buscar == '' || index < snapshot.data('data').length) {
+          return GestureDetector(
+            child: Image.network(
+              snapshot.data['data'][index]['images']['fixed_height']['url'],
+              height: 200.0,
+              fit: BoxFit.cover,
+            ),
+          );
+        } else {
+          return Container(
+            child: GestureDetector(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const <Widget>[
+                  Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 70.0,
+                  ),
+                  Text(
+                    'Carregar mais...',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22.0,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        }
       },
     );
   }
