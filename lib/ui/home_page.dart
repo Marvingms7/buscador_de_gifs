@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   border: OutlineInputBorder()),
-              style: const TextStyle(color: Colors.white, fontSize: 18.0),
+              style: const TextStyle(color: Colors.white, fontSize: 17.0),
               textAlign: TextAlign.center,
               onSubmitted: (text) {
                 setState(() {
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  int _getCount(data) {
+  int _getCount(List data) {
     if (_buscar == '') {
       return data.length;
     } else {
