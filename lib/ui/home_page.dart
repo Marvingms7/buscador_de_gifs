@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late String _buscar;
 
-  final int _offSet = 26;
+  int _offSet = 26;
 
   Future<Map> _getGifs() async {
     http.Response response;
@@ -65,6 +65,7 @@ class _HomePageState extends State<HomePage> {
               onSubmitted: (text) {
                 setState(() {
                   _buscar = text;
+                  _offSet = 0;
                 });
               },
             ),
@@ -112,36 +113,34 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.all(10.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, crossAxisSpacing: 10.0, mainAxisSpacing: 10.0),
-      itemCount: _getCount(snapshot.data['data'].length),
+      itemCount: _getCount(snapshot.data['data']),
       itemBuilder: (context, index) {
         if (_buscar == '' || index < snapshot.data('data').length) {
           return GestureDetector(
             child: Image.network(
               snapshot.data['data'][index]['images']['fixed_height']['url'],
-              height: 200.0,
+              height: 300.0,
               fit: BoxFit.cover,
             ),
           );
         } else {
-          return Container(
-            child: GestureDetector(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
-                  Icon(
-                    Icons.add,
+          return GestureDetector(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const <Widget>[
+                Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 70.0,
+                ),
+                Text(
+                  'Carregar mais...',
+                  style: TextStyle(
                     color: Colors.white,
-                    size: 70.0,
+                    fontSize: 22.0,
                   ),
-                  Text(
-                    'Carregar mais...',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22.0,
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           );
         }
