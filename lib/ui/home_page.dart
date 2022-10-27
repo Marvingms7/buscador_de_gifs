@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.all(10.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, crossAxisSpacing: 10.0, mainAxisSpacing: 10.0),
-      itemCount: _getCount(snapshot.data['data'].length),
+      itemCount: _getCount(snapshot.data['data']),
       itemBuilder: (context, index) {
         if (_buscar == '' || index < snapshot.data('data').length) {
           return GestureDetector(
@@ -123,25 +123,23 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         } else {
-          return Container(
-            child: GestureDetector(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
-                  Icon(
-                    Icons.add,
+          return GestureDetector(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const <Widget>[
+                Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 70.0,
+                ),
+                Text(
+                  'Carregar mais...',
+                  style: TextStyle(
                     color: Colors.white,
-                    size: 70.0,
+                    fontSize: 22.0,
                   ),
-                  Text(
-                    'Carregar mais...',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22.0,
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           );
         }
